@@ -1,31 +1,23 @@
-firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
-    // User is signed in.
-	document.getElementById("user_div");
-	document.getElementById("login_div");
-	
-	var user = firebase.auth().currentUser;
-	
+    window.location = "patient.html";
   } else {
-    // No user is signed in.
-	document.getElementById("user_div").style.display="none";
-	document.getElementById("login_div").style.display="block";
+    //window.location = "login.html";
   }
 });
 
+function login() {
 
-function login(){
+  var userEmail = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
 
-var userEmail=document.getElementById("email_field").value;
-var userPass=document.getElementById("password_field").value;
+  firebase.auth().signInWithEmailAndPassword(userEmail, password).catch(function (error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
 
-firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  
-  window.alert("Error : " + errorMessage);
-  // ...
-});
-
+    window.alert("Error: \n"+ errorMessage);
+    // ...
+  });
 }
+
