@@ -77,23 +77,47 @@ include "connect.php";
 
 
     <?php
-
+ 
     session_start();
-      if(isset($_POST['login'])){
-         //echo '<script type="text/javascript"> alert("Logged in xD !!")</script>';
-         $email=$_POST['email'];
-         $password=$_POST['password'];
-         $query = "SELECT * FROM patient WHERE email = '$email' AND password = ('$password')";
-         $query_run = mysqli_query($con,$query);
-         if (mysqli_num_rows ($query_run) > 0) {
-            //vaild
-            $_SESSION['email']=$email;
-            header("location:patient.php");
-         }
-         else {
-            //Invaild
-            echo '<script type="text/javascript"> alert("Invaild User")</script>';
-         }
+    if(isset($_POST['login'])){
+            //echo '<script type="text/javascript"> alert("Logged in xD !!")</script>';
+            $user = $_POST['user'];
+ 
+            $email=$_POST['email'];
+            $password=$_POST['password'];
+            $query = "SELECT * FROM patient WHERE email = '$email' AND password = ('$password')";
+            $query1 = "SELECT * FROM doctor WHERE email = '$email' AND password = ('$password')";
+ 
+            
+ 
+            if($user == "doctor"){
+					$query_run = mysqli_query($con,$query1);
+                    if (mysqli_num_rows ($query_run) > 0) {
+                    //vaild
+                    $_SESSION['email']=$email;
+                    header("location:doctor.php");
+                }
+                else {
+                    //Invaild
+                    echo '<script type="text/javascript"> alert("Invaild Doctor")</script>';
+                }
+ 
+            }
+            else{
+				$query_run = mysqli_query($con,$query);
+                    if (mysqli_num_rows ($query_run) > 0) {
+                    //vaild
+                    $_SESSION['email']=$email;
+                    header("location:patient.php");
+                }
+                else {
+                    //Invaild
+                    echo '<script type="text/javascript"> alert("Invaild Patient")</script>';
+                }
+ 
+            }
+ 
+   
       }
 mysqli_close($con);
     ?>

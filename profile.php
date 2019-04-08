@@ -2,16 +2,17 @@
 include "connect.php";
 
 session_start();
-$email=$_SESSION['email'];
+$user = $_SESSION['name'];
+echo $user;
 
-$result = mysqli_query($con,"SELECT `p_id`, `pic`, `name`, `age`, `sex`, `primaryD` FROM `patient` WHERE email = '$email'");
+$result = mysqli_query($con,"SELECT `p_id`, `pic`, `name`, `age`, `sex`, `primaryD` FROM `patient` WHERE name = '$user'");
 $retrive = mysqli_fetch_array($result);
 
 //print_r($retrive);
 
 $id = $retrive['p_id'];
 $image = $retrive['pic'];
-$name = $retrive['name'];
+$email = $retrive['email'];
 $age = $retrive['age'];
 $sex = $retrive['sex'];
 $pd = $retrive['primaryD'];
@@ -68,12 +69,12 @@ $pd = $retrive['primaryD'];
                         <div class="card-body"><img class="rounded-circle" src="<?php echo "img/$image";?>"
                                 style="width:150px;height:150px;margin-left:0px;">
                             <h4 class="card-title" style="padding-top:20px;"><?php echo $name;?></h4>
-                            <h5> Email : <?php echo $email;?></h5>
+                            <h5>Email : <?php echo $email;?></h5>
                             <h5>Age : <?php echo $age;?></h5>
                             <h5>Sex &nbsp;: <?php echo $sex;?></h5>
                             <h5>Patient ID : <?php echo $id;?></h5>
-                            <button type="button" class="btn btn-danger"><a class="text-monospace" href="login.php"
-                                    style="color:#ffffff;"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></button>
+                            <button type="button" class="btn btn-danger"><a class="text-monospace" href="doctor.php"
+                                    style="color:#ffffff;"><i class="fa fa-sign-out"></i>&nbsp;Back</a></button>
                         </div>
                     </div>
                     <br>

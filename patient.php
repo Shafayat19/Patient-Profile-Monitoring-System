@@ -71,7 +71,7 @@ $pd = $retrive['primaryD'];
                     <br>
                     <h4 class="card-title">Primary Diagnosis:<br></h4>
                     <p style="font-size:19px;"><?php echo $pd;?><br></p>
-                </div>
+    </div>
 
 <?php
    
