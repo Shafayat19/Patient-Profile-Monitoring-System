@@ -41,27 +41,35 @@ include "connect.php";
 <div id="regbox">
 
    <form id="registrationpage" enctype="multipart/form-data" action="registartion.php" method="post">
-      <h1>Registration</h1>
+      <h1>Book Appointment</h1>
 
          <input type="text" name="email" class="input" placeholder="Email" required/>
          <br>
-         <input type="password" name="password" class="input" placeholder="Password" required/>
+         <input type="text" name="name" class="input" placeholder="Name" required/>
          <br>
-         <input type="password" name="cpassword" class="input" placeholder="Re-enter Password" required/>
+         <input type="text" name="phone" class="input" placeholder="Contact Number" />
          <br>
+         <input type="text" name="sex" class="input" placeholder="Sex" />
          <br>
-         <input type="file" name="pic" class="input" placeholder="Picture" />
+         <input type="text" name="address" class="input" placeholder="Address" required/>
          <br>
-         <input type="text" name="name" class="input" placeholder="Name" />
+          <input type="text" name="dname" class="input" placeholder="Doctor's Name" required/>
          <br>
-         <input type="text" name="age" class="input" placeholder="Age" required/>
-         <br>
-         <input type="text" name="sex" class="input" placeholder="Sex" required/>
-         <br>
-         <input type="text" name="primaryD" class="input" placeholder="Primary Diagnosis" required/>
-         <br>
-         <br>
-         <input type="submit" name="signup" class="Registrationbutton" value="Submit"/>
+        <select name="subscription">
+         <option value = > Choose Option </option>
+        <option value = "ctscan">CT Scan</option>
+        <option value = "mri">MRI</option>
+        <option value = "xray">X-Ray</option>
+        <option value = "consultant">Consultant</option>
+        </select>
+        <br>
+        <label for="input">Time :</label><br>
+        <input type="time" name="time" class="input" placeholder="Time" />
+        <br>
+        <label for="input">Date :</label><br>
+        <input type="date" name="date" class="input" placeholder="Date" />
+        <br>
+        <input type="submit" name="signup" class="Registrationbutton" value="Submit"/>
 
    </form>
 

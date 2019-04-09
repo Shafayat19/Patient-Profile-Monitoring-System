@@ -4,7 +4,7 @@ include "connect.php";
 session_start();
 $email=$_SESSION['email'];
 
-$result = mysqli_query($con,"SELECT `d_id`, `email`, `password`, `dname`, `dfield` FROM `doctor` WHERE email = '$email'");
+$result = mysqli_query($con,"SELECT `d_id`, `email`, `password`, `dname`,`phone`, `dfield` FROM `doctor` WHERE email = '$email'");
 $retrive = mysqli_fetch_array($result);
 
 //print_r($retrive);
@@ -12,6 +12,7 @@ $retrive = mysqli_fetch_array($result);
 $id = $retrive['d_id'];
 $name = $retrive['dname'];
 $dfield = $retrive['dfield'];
+$phone = $retrive['phone'];
 
 
 ?>
@@ -43,7 +44,7 @@ $dfield = $retrive['dfield'];
                         <li class="nav-item" role="presentation"><a class="nav-link" href="index.html"
                                 style="color:#ffffff;"><i class="fa fa-home"></i>&nbsp;Home</a></li>
 
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="doctor.php"
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="doclist.php"
                                 style="color:#ffffff;"><i class="fa fa-user-circle-o"></i>&nbsp;Doctor</a></li>
 
                         <li class="nav-item" role="presentation"><a class="nav-link" href="registartion.php"
@@ -67,6 +68,7 @@ $dfield = $retrive['dfield'];
                                 <h4 class="card-title" style="padding-top:20px;"><?php echo $name;?></h4>
                                 <h5>Username : <?php echo $email;?></h5>
                                 <h5>Field    : <?php echo $dfield;?></h5>
+                                <h5>Phone    : <?php echo $phone;?></h5>
                                 <h5>ID       : <?php echo $id;?></h5>
                                 <br>
                                 <button type="button" class="btn btn-danger"><a class="text-monospace" href="login.php"
@@ -95,7 +97,7 @@ foreach($datas as $data)
 { ?>
     
     <li class="list-group-item">
-    <a class="text-monospace" href="profile.php" style="color:#333; "><i class="fa fa-user-circle">
+    <a class="text-monospace" href="profile.php?id=<?php echo $data['p_id'];?>" style="color:#333; "><i class="fa fa-user-circle">
 
     </i>&nbsp;<?php echo $data['name'];?>
     </a>

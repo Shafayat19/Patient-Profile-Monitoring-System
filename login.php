@@ -28,7 +28,7 @@ include "connect.php";
 
                         <li class="nav-item" role="presentation"><a class="nav-link" href="index.html" style="color:#ffffff;"><i class="fa fa-home"></i>&nbsp;Home</a></li>
                     
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="doctor.php" style="color:#ffffff;"><i class="fa fa-user-circle-o"></i>&nbsp;Doctor</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="doclist.php" style="color:#ffffff;"><i class="fa fa-user-circle-o"></i>&nbsp;Doctor</a></li>
 
                         <li class="nav-item" role="presentation"><a class="nav-link" href="registartion.php" style="color:#ffffff;"><i class="fa fa-drivers-license"></i>&nbsp;Registration</a></li>
 
