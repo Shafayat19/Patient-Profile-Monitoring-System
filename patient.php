@@ -16,6 +16,8 @@ $age = $retrive['age'];
 $sex = $retrive['sex'];
 $pd = $retrive['primaryD'];
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +44,7 @@ $pd = $retrive['primaryD'];
 
                         <li class="nav-item" role="presentation"><a class="nav-link" href="index.html" style="color:#ffffff;"><i class="fa fa-home"></i>&nbsp;Home</a></li>
                     
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="doctor.php" style="color:#ffffff;"><i class="fa fa-user-circle-o"></i>&nbsp;Doctor</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="doclist.php" style="color:#ffffff;"><i class="fa fa-user-circle-o"></i>&nbsp;Doctor</a></li>
 
                         <li class="nav-item" role="presentation"><a class="nav-link" href="registartion.php" style="color:#ffffff;"><i class="fa fa-drivers-license"></i>&nbsp;Registration</a></li>
 
@@ -71,7 +73,64 @@ $pd = $retrive['primaryD'];
                     <br>
                     <h4 class="card-title">Primary Diagnosis:<br></h4>
                     <p style="font-size:19px;"><?php echo $pd;?><br></p>
-                </div>
+    </div>
+
+<?php 
+
+$result2 = mysqli_query($con,"SELECT `p_id`, `cdiagno`, `sex`, `diagno`, `med`, `dname`, `time`, `cdate`, `ndate` FROM `issue` WHERE p_id = $id");
+$retrive = mysqli_fetch_array($result2);
+
+$p_id=$retrive['p_id'];
+$cdiagno=$retrive['cdiagno'];
+$sex=$retrive['sex'];
+$diagno=$retrive['diagno'];
+$med=$retrive['med'];
+$dname=$retrive['dname'];
+$time=$retrive['time'];
+$cdate=$retrive['cdate'];
+$ndate=$retrive['ndate'];
+
+
+?>
+
+    <div class="card-body">
+            <h4 class="card-title">Prescriptions Issued:<br></h4>
+            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#exampleModalCenter">View Prescription<br></button>
+            </a>
+        </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Prescription</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre>
+        <h5>Name: <?php echo $name;?></h5>
+        <h5>Current Diagnosis : <?php echo $cdiagno;?></h5>
+        <h5>Sex &nbsp;: <?php echo $sex;?></h5>
+        <h5>Diagnostic Tests : <?php echo $diagno;?></h5>
+        <h5>Medicines and corresponding doses : <?php echo $med;?></h5>
+        <h5>Doctor's Name : <?php echo $dname;?></h5>
+        <h5>Time &nbsp;: <?php echo $time;?></h5>
+        <h5>Date : <?php echo $cdate;?></h5>
+        <h5>Next date of visit: <?php echo $ndate;?></h5>
+        </pre>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <?php
    
@@ -120,7 +179,7 @@ $pd = $retrive['primaryD'];
             <input class="btn btn-outline-success" type="submit" name="upload" id="psubmit"></input>
         </form>
 
-        <button class="btn btn-primary" type="submit" name="book" style="margin-left:92px;margin-top:19px;">Book Appointment</button>
+        <button class="btn btn-primary" type="submit" name="book" style="margin-left:92px;margin-top:19px;"><a class="text-monospace" href="booking.php" style="color:#ffffff;margin-top:19px;"><i class="fa fa-sign-out"></i>Book Appointment</a></button>
     </div>
 
 <?php

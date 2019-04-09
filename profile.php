@@ -1,10 +1,9 @@
 <?php
 include "connect.php";
 
-session_start();
-$email=$_SESSION['email'];
+$user = $_GET["id"];
 
-$result = mysqli_query($con,"SELECT `p_id`, `pic`, `name`, `age`, `sex`, `primaryD` FROM `patient` WHERE email = '$email'");
+$result = mysqli_query($con,"SELECT `p_id`, `email`, `pic`, `name`, `age`, `sex`, `primaryD` FROM `patient` WHERE p_id = '$user'");
 $retrive = mysqli_fetch_array($result);
 
 //print_r($retrive);
@@ -12,6 +11,7 @@ $retrive = mysqli_fetch_array($result);
 $id = $retrive['p_id'];
 $image = $retrive['pic'];
 $name = $retrive['name'];
+$email = $retrive['email'];
 $age = $retrive['age'];
 $sex = $retrive['sex'];
 $pd = $retrive['primaryD'];
@@ -45,7 +45,7 @@ $pd = $retrive['primaryD'];
                         <li class="nav-item" role="presentation"><a class="nav-link" href="index.html"
                                 style="color:#ffffff;"><i class="fa fa-home"></i>&nbsp;Home</a></li>
 
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="doctor.php"
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="doclist.php"
                                 style="color:#ffffff;"><i class="fa fa-user-circle-o"></i>&nbsp;Doctor</a></li>
 
                         <li class="nav-item" role="presentation"><a class="nav-link" href="registartion.php"
@@ -68,12 +68,12 @@ $pd = $retrive['primaryD'];
                         <div class="card-body"><img class="rounded-circle" src="<?php echo "img/$image";?>"
                                 style="width:150px;height:150px;margin-left:0px;">
                             <h4 class="card-title" style="padding-top:20px;"><?php echo $name;?></h4>
-                            <h5> Email : <?php echo $email;?></h5>
+                            <h5>Email : <?php echo $email;?></h5>
                             <h5>Age : <?php echo $age;?></h5>
                             <h5>Sex &nbsp;: <?php echo $sex;?></h5>
                             <h5>Patient ID : <?php echo $id;?></h5>
-                            <button type="button" class="btn btn-danger"><a class="text-monospace" href="login.php"
-                                    style="color:#ffffff;"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></button>
+                            <button type="button" class="btn btn-danger"><a class="text-monospace" href="doctor.php"
+                                    style="color:#ffffff;"><i class="fa fa-sign-out"></i>&nbsp;Back</a></button>
                         </div>
                     </div>
                     <br>
@@ -82,10 +82,17 @@ $pd = $retrive['primaryD'];
                 </div>
 
 
-        <div class="card-body">
-            <h4 class="card-title">Prescriptions Issued:<br></h4>
-            <p><a href="#" style="font-size:20px;">Pdf</a><br></p><button class="btn btn-success" type="button">Issue New Prescription<br></button></div>
-        <div class="card-body">
+
+    <div class="card-body">
+        <h4 class="card-title">Prescriptions Issued:<br></h4>
+        <p>
+        <a href="issue.php" style="font-size:20px;"><br></p>
+        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#exampleModalCenter">Issue New Prescription<br></button>
+        </a>
+    </div>
+    <div class="card-body">
+
+
 
 
             <?php
@@ -120,24 +127,6 @@ $pd = $retrive['primaryD'];
                 </div>
             </div>
 
-
-
-
-
-            <div class="container" id="file-upld" style="background-color:#ffffff;margin-top:21px;">
-
-                <form method="post" id="patient" enctype="multipart/form-data">
-                    <h3 class="text-capitalize text-center" style="padding:8px;">Upload Reports</h3>
-                    <div>
-                        <label>Report Name</label>
-                        <input class="form-control" type="text" name="rname"></div>
-                    <input type="file" name="file">
-                    <input class="btn btn-outline-success" type="submit" name="upload" id="psubmit"></input>
-                </form>
-
-                <button class="btn btn-primary" type="submit" name="book" style="margin-left:92px;margin-top:19px;">Book
-                    Appointment</button>
-            </div>
 
             <?php
 

@@ -40,88 +40,68 @@ include "connect.php";
    <link rel="stylesheet" href="style.css">
 <div id="regbox">
 
-   <form id="registrationpage" enctype="multipart/form-data" action="registartion.php" method="post">
-      <h1>Registration</h1>
+   <form id="registrationpage" enctype="multipart/form-data" action="issue.php" method="post">
+      <h1>Issue Prescription</h1>
 
-         <input type="text" name="email" class="input" placeholder="Email" required/>
-         <br>
-         <input type="password" name="password" class="input" placeholder="Password" required/>
-         <br>
-         <input type="password" name="cpassword" class="input" placeholder="Re-enter Password" required/>
-         <br>
-         <br>
-         <input type="file" name="pic" class="input" placeholder="Picture" />
-         <br>
-         <input type="text" name="name" class="input" placeholder="Name" />
-         <br>
-         <input type="text" name="age" class="input" placeholder="Age" required/>
-         <br>
-         <input type="text" name="sex" class="input" placeholder="Sex" required/>
-         <br>
-         <input type="text" name="primaryD" class="input" placeholder="Primary Diagnosis" required/>
-         <br>
-         <br>
-         <input type="submit" name="signup" class="Registrationbutton" value="Submit"/>
+        <input type="text" name="p_id" class="input" placeholder="Patient ID" />
+        <br>
+        <input type="text" name="cdiagno" class="input" placeholder="Current Diagnosis" />
+        <br>
+        <input type="text" name="sex" class="input" placeholder="Sex" />
+        <br>
+        <input type="text" name="diagno" class="input" placeholder="Diagnostic Tests Required" />
+        <br>
+        <input type="text" name="med" class="input" placeholder="Medicines and Corresponding Doses" />
+        <br>
+        <input type="text" name="dname" class="input" placeholder="Doctor's Name" />
+        <br>
+        <label for="input">Time :</label><br>
+        <input type="time" name="time" class="input" placeholder="Time" />
+        <br>
+        <label for="input">Current Date :</label><br>
+        <input type="date" name="cdate" class="input" placeholder="Current Date" />
+        <br>
+        <label for="input">Next Date to Visit :</label><br>
+        <input type="date" name="ndate" class="input" placeholder="Next Date to Visit" />
+        <br>
+        <input type="submit" name="issue" class="Registrationbutton" value="Submit"/>
 
    </form>
 
    <?php
 
-   if (isset($_POST['signup'])) {
+if (isset($_POST['issue'])) {
       //echo '<script type="text/javascript"> alert("Register button click")</script>';
 
-      $email=$_POST['email'];
-      $password=$_POST['password'];
-      $cpassword=$_POST['cpassword'];
-
-      $name=$_POST['name'];
-      $age=$_POST['age'];
+      $p_id=$_POST['p_id'];
+      $cdiagno=$_POST['cdiagno'];
       $sex=$_POST['sex'];
-      $primaryD=$_POST['primaryD'];
+      $diagno=$_POST['diagno'];
+      $med=$_POST['med'];
+      $dname=$_POST['dname'];
+      $time=$_POST['time'];
+      $cdate=$_POST['cdate'];
+      $ndate=$_POST['ndate'];
 
-      $pic=$_FILES['pic']['name'];
-      $picTmp=$_FILES['pic']['tmp_name'];
-      $folder="img/";
-
-      move_uploaded_file($picTmp,$folder.$pic);
-
-
-      if ($password == $cpassword) {
-         $query = "SELECT * FROM patient WHERE email = '$email' ";
-
-         $query_run = mysqli_query ($con,$query);
-
-         if (mysqli_num_rows($query_run)>0) {
-            //all ready a user
-            echo '<script type="text/javascript"> alert("User Exists !!")</script>';
-         }
-         else {
-
-           $query1 = "INSERT INTO patient (email, password, pic, name, age, sex, primaryD) VALUES ('$email','$password','$pic','$name','$age','$sex','$primaryD')";
+        $query1 = "INSERT INTO `issue` (`p_id`, `cdiagno`, `sex`, `diagno`, `med`, `dname`, `time`, `cdate`, `ndate`) VALUES ('$p_id','$cdiagno','$sex','$diagno','$med','$dname','$time','$cdate','$ndate')";
 
 
             $query_run = mysqli_query ($con,$query1);
             if ($query_run) {
-               echo '<script type="text/javascript"> alert("Member Add Successfully !!")</script>';
+                echo '<script type="text/javascript"> alert("Prescription Issued Successfully !!")</script>';
             }
             else {
-               echo (mysqli_error($con));
+                echo (mysqli_error($con));
                //echo '<script type="text/javascript"> alert("!! Error !!")</script>';
             }
+    
 
-
-         }
-
-      }
-      else {
-         echo '<script type="text/javascript"> alert("Please Enter Values !!")</script>';
-      }
-   }
+}
 
 mysqli_close($con);
 
     ?>
-  
+
 </div>
 
 </body>
