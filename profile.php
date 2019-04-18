@@ -25,17 +25,17 @@ $pd = $retrive['primaryD'];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PPMS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
 </head>
 
-<body>
+<body style="background-image:url(assets/img/doc.jpg);background-attachment: fixed;">
     <div>
         <nav class="navbar navbar-light navbar-expand-md bg-dark navigation-clean-button">
-            <div class="container-fluid"><a class="navbar-brand text-white" href="#"><i
+            <div class="container-fluid"><a class="navbar-brand text-white" href="index.html"><i
                         class="fa fa-globe"></i>&nbsp;PPMS</a><button class="navbar-toggler" data-toggle="collapse"
                     data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
                         class="navbar-toggler-icon"></span></button>
@@ -58,17 +58,16 @@ $pd = $retrive['primaryD'];
             </div>
         </nav>
     </div>
-    <div class="container">
-        <div id="profile-info">
-            <div class="card" style="width:990px;"></div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="card">
 
-                        <div class="card-body"><img class="rounded-circle" src="<?php echo "img/$image";?>"
-                                style="width:150px;height:150px;margin-left:0px;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div id="profile-info">
+                    <div class="card bg-light" style="margin-top:20px; width:1100px;">
+                        <div class="card-body" style="margin-left:20px;"><img class="rounded-circle"
+                                src="<?php echo "img/$image";?>" style="width:150px;height:150px;">
                             <h4 class="card-title" style="padding-top:20px;"><?php echo $name;?></h4>
-                            <h5>Email : <?php echo $email;?></h5>
+                            <h5> Email : <?php echo $email;?></h5>
                             <h5>Age : <?php echo $age;?></h5>
                             <h5>Sex &nbsp;: <?php echo $sex;?></h5>
                             <h5>Patient ID : <?php echo $id;?></h5>
@@ -77,20 +76,34 @@ $pd = $retrive['primaryD'];
                         </div>
                     </div>
                     <br>
-                    <h4 class="card-title">Primary Diagnosis:<br></h4>
-                    <p style="font-size:19px;"><?php echo $pd;?><br></p>
                 </div>
 
-
-
-    <div class="card-body">
-        <h4 class="card-title">Prescriptions Issued:<br></h4>
-        <p>
-        <a href="issue.php" style="font-size:20px;"><br></p>
-        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#exampleModalCenter">Issue New Prescription<br></button>
-        </a>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
+
+
+    <div class="container">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h4 class="card-title">Prescriptions Issued:<br></h4>
+                <p>
+                    <a href="issue.php" style="font-size:20px;"><br></p>
+                <button class="btn btn-success" type="button" data-toggle="modal"
+                    data-target="#exampleModalCenter">Issue
+                    New Prescription<br></button>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="container" style="margin-top:20px;">
+        <div class="card bg-light">
+
+
 
 
 
@@ -103,7 +116,7 @@ $pd = $retrive['primaryD'];
 
             <div class="card-body">
                 <h4 class="card-title">Report:<br></h4>
-                <div class="table-responsive-sm table-bordered" style="width:760px;">
+                <div class="table-responsive-sm table-bordered" style="width:1000px;">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <th>Report</th>
@@ -114,7 +127,7 @@ $pd = $retrive['primaryD'];
           foreach($datas as $data)
           { ?>
                             <tr>
-                                <td style="width:372px;"><?php echo $data['rname'];?></td>
+                                <td style="width:500px;"><?php echo $data['rname'];?></td>
                                 <td><a href="files/<?php echo $data['file'];?>">Report</a></td>
                             </tr>
                             <?php
@@ -126,43 +139,16 @@ $pd = $retrive['primaryD'];
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
 
 
-            <?php
 
-    if (isset($_POST['upload'])) {
-    //echo '<script type="text/javascript"> alert("Register button click")</script>';
-    
+    <div class="container-fluid" id="book"></div>
+    <script src="assets/script/jquery.min.js"></script>
+    <script src="assets/script/bootstrap.bundle.min.js"></script>
+    <script src="assets/script/jquery.dataTables.min.js"></script>
+    <script src="assets/script/dataTables.bootstrap.min.js"></script>
+</body>
 
-    $rname=$_POST['rname'];
-    $report=$_FILES['file']['name'];
-    $reportTmp=$_FILES['file']['tmp_name'];
-    $folder="files/";
-
-      move_uploaded_file($reportTmp,$folder.$report);
-
-    $query1 = "INSERT INTO report (p_id, rname, file) VALUES ('$id','$rname','$report')";
-    $query_run = mysqli_query ($con,$query1);
-        if ($query_run) {
-            echo '<script type="text/javascript"> alert("Report Upload Successful !!")</script>';
-        }
-        else {
-            echo (mysqli_error($con));
-            //echo '<script type="text/javascript"> alert("!! Error !!")</script>';
-        }
-    }
-
-mysqli_close($con);
-
-    ?>
-
-
-            <div class="container-fluid" id="book"></div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.bundle.min.js">
-            </script>
-            <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-            </body>
-
-            </html>
+</html>
