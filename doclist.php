@@ -9,10 +9,10 @@ include "connect.php";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PPMS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
 </head>
 
@@ -55,37 +55,39 @@ include "connect.php";
 
 
 
-            <?php
+                                    <?php
    
      $datas = mysqli_query($con, "SELECT `dname`, `dfield` FROM `doctor` ORDER by dfield");
      
   ?>
 
-            <div class="card-body">
-                <center><h4 class="card-title">Doctor List<br></h4></center>
-                <div class="table-responsive-sm table-bordered" style="width:760px;">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead>
-                            <th>Name</th>
-                            <th>Field</th>
-                        </thead>
-                        <tbody>
-                            <?php
+                                    <div class="card-body">
+                                        <center>
+                                            <h4 class="card-title">Doctor List<br></h4>
+                                        </center>
+                                        <div class="table-responsive-sm table-bordered" style="width:760px;">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <th>Name</th>
+                                                    <th>Field</th>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
           foreach($datas as $data)
           { ?>
-                            <tr>
-                                <td style="width:372px;"><?php echo $data['dname'];?></td>
-                                <td style="width:372px;"><?php echo $data['dfield'];?></td>
-                            </tr>
-                            <?php
+                                                    <tr>
+                                                        <td style="width:372px;"><?php echo $data['dname'];?></td>
+                                                        <td style="width:372px;"><?php echo $data['dfield'];?></td>
+                                                    </tr>
+                                                    <?php
           };
          ?>
 
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -94,11 +96,12 @@ include "connect.php";
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.bundle.min.js">
-    </script>
-    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+
+
+    <script src="assets/script/jquery.min.js"></script>
+    <script src="assets/script/bootstrap.bundle.min.js"></script>
+    <script src="assets/script/jquery.dataTables.min.js"></script>
+    <script src="assets/script/dataTables.bootstrap.min.js"></script>
 </body>
 
 </html>
