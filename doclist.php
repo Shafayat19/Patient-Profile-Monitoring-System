@@ -16,7 +16,7 @@ include "connect.php";
     <link rel="stylesheet" href="assets/css/styles.min.css">
 </head>
 
-<body style="background-color:rgb(68,136,238);">
+<body style="background-image:url(assets/img/doc.jpg);background-attachment: fixed;">
     <div>
         <nav class="navbar navbar-light navbar-expand-md bg-dark navigation-clean-button">
             <div class="container-fluid"><a class="navbar-brand text-white" href="index.html"><i
